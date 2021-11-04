@@ -3,17 +3,17 @@ import style from "./App.module.css";
 import { render } from "solid-js/web";
 import { createSignal, onMount, For, createEffect } from "solid-js";
 
-type Route = 'topstories' | `item/${number}`;
+type Route = "topstories" | `item/${number}`;
 
-async function hnFetch<T>(route: Route): Promise<T>{
-  const res = await fetch( `//hacker-news.firebaseio.com/v0/${route}.json`);
+async function hnFetch<T>(route: Route): Promise<T> {
+  const res = await fetch(`//hacker-news.firebaseio.com/v0/${route}.json`);
   return await res.json();
 }
 
 const hnApi = {
   item: (id: number): Promise<Item> => hnFetch<Item>(`item/${id}`),
-  topStories: (): Promise<number[]> => hnFetch<number[]>('topstories')
-}
+  topStories: (): Promise<number[]> => hnFetch<number[]>("topstories"),
+};
 
 const PAGE_SIZE = 30;
 
