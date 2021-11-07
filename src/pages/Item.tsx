@@ -5,7 +5,7 @@ import hnApi, { Ask, ItemsWithChildren, Story } from "../api";
 import { Comment } from "../lib/Comment";
 import { ListItem } from "../lib/ListItem";
 import { Loading } from "../lib/Loading";
-import style from "./pages.module.scss";
+import { Page } from "../lib/Page";
 
 export function Item() {
   const params = useParams<{ id: string }>();
@@ -24,13 +24,13 @@ export function Item() {
   });
 
   return (
-    <Show when={item() !== undefined} fallback={() => <Loading />}>
-      <section class={style.page}>
+    <Page>
+      <Show when={item() !== undefined} fallback={() => <Loading />}>
         <ListItem {...(item() as ItemsWithChildren)} />
         <Index each={(item() as ItemsWithChildren).kids}>
           {(kid) => <Comment id={kid()} />}
         </Index>
-      </section>
-    </Show>
+      </Show>
+    </Page>
   );
 }

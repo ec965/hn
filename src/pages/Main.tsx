@@ -15,8 +15,8 @@ import { ListItem } from "../lib/ListItem";
 import { Loading } from "../lib/Loading";
 import { NavButtons } from "../lib/NavButtons";
 import { NoContent } from "../lib/NoContent";
+import { Page } from "../lib/Page";
 import { pageQuery } from "../util/pageQuery";
-import style from "./pages.module.scss";
 
 const PAGE_SIZE = 30;
 
@@ -86,7 +86,7 @@ export function Main() {
   });
 
   return (
-    <section class={style.page}>
+    <Page>
       <Switch>
         <Match when={stories.loading}>
           <Loading />
@@ -113,6 +113,6 @@ export function Main() {
           />
         </Match>
       </Switch>
-    </section>
+    </Page>
   );
 }
