@@ -1,0 +1,28 @@
+@import "../styles//variables.scss";
+
+.nav {
+  display: flex;
+  align-items: end;
+  background-color: $primary;
+  > * {
+    margin-right: 8px;
+  }
+  padding: 8px;
+  & :last-child {
+    margin-right: 0px;
+  }
+  & a {
+    &:visited {
+      color: inherit;
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.active {
+  & h3 {
+    text-decoration: underline;
+  }
+}

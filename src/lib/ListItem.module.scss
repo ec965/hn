@@ -1,0 +1,9 @@
+.title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: end;
+  flex-wrap: wrap;
+  & :first-child {
+    margin-right: 4px;
+  }
+}
