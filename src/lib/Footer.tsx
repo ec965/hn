@@ -1,20 +1,15 @@
-import { createSignal } from "solid-js";
-
+import { useTheme } from "../util/useTheme";
 import style from "./Footer.module.scss";
 
 export function Footer() {
-  const [rootTheme, setRootTheme] = createSignal(
-    document.documentElement.className
-  );
+  const [theme, setTheme] = useTheme();
 
   const switchTheme = () => {
-    document.documentElement.className =
-      rootTheme() === "dark" ? "light" : "dark";
-    setRootTheme(document.documentElement.className);
+    setTheme(theme() === "dark" ? "light" : "dark");
   };
 
   const scrollToTop = () => {
-    document.documentElement.scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -23,10 +18,10 @@ export function Footer() {
         source code
       </a>
       <p class={style.clickable} onClick={switchTheme}>
-        {rootTheme() === "dark" ? "light mode" : "dark mode"}
+        {theme() === "dark" ? "light mode" : "dark mode"}
       </p>
       <p class={style.clickable} onClick={scrollToTop}>
-        back to top
+        scroll to top
       </p>
     </footer>
   );
