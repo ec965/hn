@@ -33,7 +33,7 @@ async function getStories({
   return filteredStories;
 }
 
-export function TopStories() {
+export function Top() {
   const params = useParams<{ page?: string }>();
   const page = () => {
     if (!params.page) return 0;

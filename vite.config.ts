@@ -12,5 +12,4 @@ export default defineConfig({
       localsConvention: "camelCase",
     },
   },
-  base: "/hn-solid/",
 });

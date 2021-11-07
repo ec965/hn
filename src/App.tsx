@@ -20,14 +20,14 @@ const Links: NavItem[] = [
     name: "show",
   },
   {
-    url: "/job",
+    url: "/jobs",
     name: "jobs",
   },
 ];
 
 export function App() {
   return (
-    <Router>
+    <Router base="/hn">
       <Nav links={Links} />
       <Paths />
     </Router>

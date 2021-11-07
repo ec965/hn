@@ -41,8 +41,8 @@ export function ListItem(props: ListItemProps) {
   return (
     <article>
       <div class={style.title}>
-        <h4>{props.index}.</h4>
         <h4 title={props.url}>
+          {props.index}.{" "}
           <a href={props.url} target="_blank">
             {props.title}
           </a>
