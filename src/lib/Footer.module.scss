@@ -1,0 +1,10 @@
+@import "../styles/variables.scss";
+
+.footer {
+  margin: auto;
+  max-width: $max-width;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 8px;
+  border-top: 1px solid $black;
+}

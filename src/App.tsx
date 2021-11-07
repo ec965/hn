@@ -1,4 +1,5 @@
 import { Router } from "solid-app-router";
+import { Footer } from "./lib/Footer";
 import { Paths } from "./Paths";
 import { Nav, NavItem } from "./lib/Nav";
 import { config } from "./config";
@@ -31,6 +32,7 @@ export function App() {
     <Router base={config.BASE_PATH}>
       <Nav links={Links} />
       <Paths />
+      <Footer />
     </Router>
   );
 }
