@@ -1,6 +1,6 @@
-import "./styles/reset.css";
-import "./styles/global.scss";
 import { render } from "solid-js/web";
+
 import { App } from "./App";
+import "./styles/global.scss";
 
 render(() => <App />, document.getElementById("root") as HTMLElement);

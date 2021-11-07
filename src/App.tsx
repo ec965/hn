@@ -1,8 +1,9 @@
 import { Router } from "solid-app-router";
-import { Footer } from "./lib/Footer";
+
 import { Paths } from "./Paths";
-import { Nav, NavItem } from "./lib/Nav";
 import { config } from "./config";
+import { Footer } from "./lib/Footer";
+import { Nav, NavItem } from "./lib/Nav";
 
 const Links: NavItem[] = [
   {

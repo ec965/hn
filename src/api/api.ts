@@ -1,4 +1,5 @@
-import { Route, Item, User, Updates } from "./types";
+import { Item, Route, Updates, User } from "./types";
+
 // https://github.com/HackerNews/API
 
 async function hnFetch<T>(route: Route): Promise<T> {

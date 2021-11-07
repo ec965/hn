@@ -1,4 +1,5 @@
 import { Location, LocationState } from "solid-app-router";
+
 import { config } from "../config";
 
 export function trimSubpath(location: Location<LocationState>): string {

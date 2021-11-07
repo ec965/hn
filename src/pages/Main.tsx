@@ -1,21 +1,22 @@
+import { useLocation, useParams } from "solid-app-router";
 import {
+  For,
   Match,
   Switch,
-  For,
+  createEffect,
   createResource,
   createSignal,
-  createEffect,
 } from "solid-js";
-import { config } from "../config";
-import hnApi, { isParentItem, ParentItem } from "../api";
-import { useLocation, useParams } from "solid-app-router";
-import style from "./pages.module.scss";
-import { ListItem } from "../lib/ListItem";
-import { pageQuery } from "../util/pageQuery";
-import { NoContent } from "../lib/NoContent";
-import { Loading } from "../lib/Loading";
+
 import { ContentType } from "../Paths";
+import hnApi, { ParentItem, isParentItem } from "../api";
+import { config } from "../config";
+import { ListItem } from "../lib/ListItem";
+import { Loading } from "../lib/Loading";
 import { NavButtons } from "../lib/NavButtons";
+import { NoContent } from "../lib/NoContent";
+import { pageQuery } from "../util/pageQuery";
+import style from "./pages.module.scss";
 
 const PAGE_SIZE = 30;
 

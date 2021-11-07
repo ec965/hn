@@ -1,4 +1,5 @@
 import { hnApi } from "./api";
+
 export default hnApi;
 export type {
   Title,
@@ -13,6 +14,7 @@ export type {
   Item,
   User,
   ParentItem,
+  ItemsWithChildren,
   ChildItem,
 } from "./types";
 export {

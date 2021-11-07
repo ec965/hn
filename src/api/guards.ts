@@ -1,13 +1,13 @@
 import {
-  Item,
-  Story,
-  Comment,
   Ask,
+  ChildItem,
+  Comment,
+  Item,
   Job,
+  ParentItem,
   Poll,
   PollOpt,
-  ParentItem,
-  ChildItem,
+  Story,
 } from "./types";
 
 export function isStory(item: Item): item is Story {

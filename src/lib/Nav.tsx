@@ -1,5 +1,6 @@
-import { For } from "solid-js";
 import { Link, NavLink } from "solid-app-router";
+import { For } from "solid-js";
+
 import style from "./Nav.module.scss";
 
 export interface NavItem {

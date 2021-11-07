@@ -1,9 +1,10 @@
+import { useLocation, useNavigate } from "solid-app-router";
+import { FiChevronsLeft, FiChevronsRight } from "solid-icons/fi";
 import { Show } from "solid-js";
 import { Match, Switch } from "solid-js";
-import { useNavigate, useLocation } from "solid-app-router";
-import { trimSubpath } from "../util/trimSubpath";
+
 import { pageQuery } from "../util/pageQuery";
-import { FiChevronsLeft, FiChevronsRight } from "solid-icons/fi";
+import { trimSubpath } from "../util/trimSubpath";
 import style from "./NavButtons.module.scss";
 
 interface ButtonProps {
