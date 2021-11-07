@@ -6,6 +6,7 @@
   "dependencies": {
     "luxon": "^2.0.2",
     "solid-app-router": "^0.1.11",
+    "solid-icons": "^0.3.2",
     "solid-js": "^1.2.2"
   },
   "scripts": {

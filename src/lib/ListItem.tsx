@@ -32,7 +32,7 @@ interface ListItemProps {
   title: string;
   time: number;
   // either external link or link to comments
-  url: string;
+  url?: string;
   descendants?: number;
   by: string;
   score: number;
@@ -47,7 +47,9 @@ export function ListItem(props: ListItemProps) {
             {props.title}
           </a>
         </h4>
-        <h6>{props.url && `(${new URL(props.url).hostname})`}</h6>
+        <Show when={props.url}>
+          <h6>{props.url && `(${new URL(props.url).hostname})`}</h6>
+        </Show>
       </div>
       <p>
         {props.score} points by {props.by} |{" "}

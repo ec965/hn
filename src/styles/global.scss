@@ -58,3 +58,19 @@ a {
     }
   }
 }
+
+button {
+  width: fit-content;
+  padding: 4px;
+  border: 1px solid $black;
+  background-color: $primary;
+  color: $black;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.secondary {
+  background-color: $secondary;
+}

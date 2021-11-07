@@ -5,7 +5,6 @@ import { Top } from "./pages/Top";
 export function Paths() {
   return (
     <Routes>
-      <Route path="/:page" element={<Top />} />
       <Route path="/" element={<Top />} />
       <Route path="/new" element={<New />} />
       <Route path="/best" element={<New />} />

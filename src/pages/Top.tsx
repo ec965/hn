@@ -1,21 +1,35 @@
-import { onMount, Show, For, createResource, createSignal } from "solid-js";
+import {
+  Match,
+  onMount,
+  Show,
+  Switch,
+  For,
+  createResource,
+  createSignal,
+} from "solid-js";
 import hnApi, { Job, isJob, isStory, isAsk, Story, Ask } from "../api";
-import { useNavigate, useParams } from "solid-app-router";
+import { useLocation } from "solid-app-router";
 import style from "./pages.module.scss";
 import { ListItem } from "../lib/ListItem";
+import { LoadMoreButton } from "../lib/NavButtons/LoadMoreButton";
+import { GoBackButton } from "../lib/NavButtons/GoBackButton";
+import { pageQuery } from "../util/pageQuery";
+import { NoContent } from "../lib/NoContent";
+import { Loading } from "../lib/Loading";
+import { NavButtons } from "../lib/NavButtons";
 
 const PAGE_SIZE = 30;
 
-interface GetStoryArgs {
+interface GetPageArgs {
   ids: number[];
   page: number;
   pageSize: number;
 }
-async function getStories({
+async function getPage({
   ids,
   page,
   pageSize,
-}: GetStoryArgs): Promise<(Story | Ask | Job)[]> {
+}: GetPageArgs): Promise<(Story | Ask | Job)[]> {
   const start = page * pageSize;
   const end = start + pageSize;
   const pageIds = ids.slice(start, end);
@@ -34,17 +48,12 @@ async function getStories({
 }
 
 export function Top() {
-  const params = useParams<{ page?: string }>();
-  const page = () => {
-    if (!params.page) return 0;
-    const page = parseInt(params.page);
-    return isNaN(page) ? 0 : page;
-  };
-  const navigate = useNavigate();
+  const location = useLocation();
+  const page = () => pageQuery(location);
   const [ids, setIds] = createSignal<number[]>([]);
   const [stories] = createResource(
     () => ({ ids: ids(), page: page(), pageSize: PAGE_SIZE }),
-    getStories
+    getPage
   );
 
   onMount(async () => {
@@ -54,11 +63,14 @@ export function Top() {
 
   return (
     <section class={style.page}>
-      <Show when={!stories.loading} fallback={() => <h6>Loading...</h6>}>
-        <Show
-          when={(stories() ?? []).length > 0}
-          fallback={() => <h5>No more content</h5>}
-        >
+      <Switch>
+        <Match when={stories.loading}>
+          <Loading />
+        </Match>
+        <Match when={page() * PAGE_SIZE > ids().length}>
+          <NoContent />
+        </Match>
+        <Match when={!stories.loading}>
           <For each={stories()}>
             {(item, index) => (
               <ListItem
@@ -68,13 +80,12 @@ export function Top() {
               />
             )}
           </For>
-          <Show when={(stories() ?? []).length >= PAGE_SIZE}>
-            <button onClick={() => navigate(`/${page() + 1}`)}>
-              Load More
-            </button>
-          </Show>
-        </Show>
-      </Show>
+          <NavButtons
+            showBackward={page() > 0}
+            showForward={(stories() ?? []).length >= PAGE_SIZE}
+          />
+        </Match>
+      </Switch>
     </section>
   );
 }

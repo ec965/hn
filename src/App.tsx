@@ -1,6 +1,7 @@
 import { Router } from "solid-app-router";
 import { Paths } from "./Paths";
 import { Nav, NavItem } from "./lib/Nav";
+import { config } from "./config";
 
 const Links: NavItem[] = [
   {
@@ -27,7 +28,7 @@ const Links: NavItem[] = [
 
 export function App() {
   return (
-    <Router base="/hn">
+    <Router base={config.BASE_PATH}>
       <Nav links={Links} />
       <Paths />
     </Router>
