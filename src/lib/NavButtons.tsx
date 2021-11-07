@@ -48,10 +48,10 @@ interface NavButtonProps {
 export function NavButtons(props: NavButtonProps) {
   return (
     <div class={style.container}>
-      <Show when={props.showBackward}>
+      <Show when={props.showBackward} fallback={<div />}>
         <Button direction="backward" />
       </Show>
-      <Show when={props.showForward}>
+      <Show when={props.showForward} fallback={<div />}>
         <Button direction="forward" />
       </Show>
     </div>
