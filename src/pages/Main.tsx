@@ -1,21 +1,20 @@
 import {
   Match,
-  onMount,
-  Show,
   Switch,
   For,
   createResource,
   createSignal,
+  createEffect,
 } from "solid-js";
-import hnApi, { Job, isJob, isStory, isAsk, Story, Ask } from "../api";
-import { useLocation } from "solid-app-router";
+import { config } from "../config";
+import hnApi, { isParentItem, ParentItem } from "../api";
+import { useLocation, useParams } from "solid-app-router";
 import style from "./pages.module.scss";
 import { ListItem } from "../lib/ListItem";
-import { LoadMoreButton } from "../lib/NavButtons/LoadMoreButton";
-import { GoBackButton } from "../lib/NavButtons/GoBackButton";
 import { pageQuery } from "../util/pageQuery";
 import { NoContent } from "../lib/NoContent";
 import { Loading } from "../lib/Loading";
+import { ContentType } from "../Paths";
 import { NavButtons } from "../lib/NavButtons";
 
 const PAGE_SIZE = 30;
@@ -29,26 +28,50 @@ async function getPage({
   ids,
   page,
   pageSize,
-}: GetPageArgs): Promise<(Story | Ask | Job)[]> {
+}: GetPageArgs): Promise<ParentItem[]> {
   const start = page * pageSize;
   const end = start + pageSize;
   const pageIds = ids.slice(start, end);
 
-  const stories = await Promise.all(
-    pageIds.map(async (id) => {
-      const story = await hnApi.item(id);
-      if (isStory(story) || isAsk(story) || isJob(story)) return story;
-      else return false;
-    })
+  const items = await Promise.all(
+    pageIds.map(async (id) => await hnApi.item(id))
   );
-  const filteredStories = stories.filter((story): story is Story | Ask | Job =>
-    Boolean(story)
-  );
-  return filteredStories;
+  return items.filter((item): item is ParentItem => isParentItem(item));
 }
 
-export function Top() {
+function mapContentTypeToApi(contentType: ContentType | undefined) {
+  switch (contentType) {
+    case "ask":
+      return hnApi.askStories();
+    case "new":
+      return hnApi.newStories();
+    case "best":
+      return hnApi.bestStories();
+    case "jobs":
+      return hnApi.jobStories();
+    case "show":
+      return hnApi.showStories();
+    default:
+      return hnApi.topStories();
+  }
+}
+
+function mapContentTypeToLimit(contentType: ContentType | undefined) {
+  switch (contentType) {
+    case "ask":
+    case "jobs":
+    case "show":
+      return config.LIMIT_JOB_ASK_SHOW;
+    case "new":
+    case "best":
+    default:
+      return config.LIMIT_TOP_NEW_BEST;
+  }
+}
+
+export function Main() {
   const location = useLocation();
+  const params = useParams<{ contentType?: ContentType }>();
   const page = () => pageQuery(location);
   const [ids, setIds] = createSignal<number[]>([]);
   const [stories] = createResource(
@@ -56,8 +79,8 @@ export function Top() {
     getPage
   );
 
-  onMount(async () => {
-    const res = await hnApi.topStories();
+  createEffect(async () => {
+    const res = await mapContentTypeToApi(params.contentType);
     setIds(res);
   });
 
@@ -75,14 +98,17 @@ export function Top() {
             {(item, index) => (
               <ListItem
                 index={index() + 1 + page() * PAGE_SIZE}
-                url={"url" in item ? item.url : ""}
+                url={"url" in item ? item.url : undefined}
                 {...item}
               />
             )}
           </For>
           <NavButtons
             showBackward={page() > 0}
-            showForward={(stories() ?? []).length >= PAGE_SIZE}
+            showForward={
+              (page() + 1) * PAGE_SIZE <
+              mapContentTypeToLimit(params.contentType)
+            }
           />
         </Match>
       </Switch>

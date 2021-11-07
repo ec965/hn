@@ -12,5 +12,17 @@ export type {
   PollOpt,
   Item,
   User,
+  ParentItem,
+  ChildItem,
 } from "./types";
-export { isStory, isComment, isAsk, isJob, isPoll, isPollOpt } from "./guards";
+export {
+  isStory,
+  isComment,
+  isAsk,
+  isJob,
+  isPoll,
+  isPollOpt,
+  testDebugItem,
+  isChildItem,
+  isParentItem,
+} from "./guards";

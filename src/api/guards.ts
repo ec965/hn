@@ -1,4 +1,14 @@
-import { Item, Story, Comment, Ask, Job, Poll, PollOpt } from "./types";
+import {
+  Item,
+  Story,
+  Comment,
+  Ask,
+  Job,
+  Poll,
+  PollOpt,
+  ParentItem,
+  ChildItem,
+} from "./types";
 
 export function isStory(item: Item): item is Story {
   return item.type === "story" && "url" in item;
@@ -22,4 +32,21 @@ export function isPoll(item: Item): item is Poll {
 
 export function isPollOpt(item: Item): item is PollOpt {
   return item.type === "pollopt";
+}
+
+export function testDebugItem(item: Item): void {
+  if (isStory(item)) return console.log("story");
+  if (isComment(item)) return console.log("comment");
+  if (isAsk(item)) return console.log("ask");
+  if (isJob(item)) return console.log("job");
+  if (isPoll(item)) return console.log("poll");
+  if (isPollOpt(item)) return console.log("pollopt");
+}
+
+export function isParentItem(item: Item): item is ParentItem {
+  return "descendants" in item || item.type === "job";
+}
+
+export function isChildItem(item: Item): item is ChildItem {
+  return isPollOpt(item) || isComment(item);
 }

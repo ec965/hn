@@ -19,9 +19,11 @@ export interface ItemBase {
 }
 
 // Parent/Title items
+export type ParentItem = Story | Ask | Job | Poll;
+
 export interface Story extends ItemBase {
   descendants: number;
-  kids: number[];
+  kids?: number[];
   time: number;
   title: string;
   type: "story";
@@ -30,7 +32,7 @@ export interface Story extends ItemBase {
 
 export interface Ask extends ItemBase {
   descendants: number;
-  kids: number[];
+  kids?: number[];
   text: string;
   time: number;
   title: string;
@@ -47,7 +49,7 @@ export interface Job extends ItemBase {
 
 export interface Poll extends ItemBase {
   descendants: number;
-  kids: number[];
+  kids?: number[];
   parts: number[];
   text: string;
   time: number;
@@ -56,6 +58,8 @@ export interface Poll extends ItemBase {
 }
 
 // Children Items
+export type ChildItem = PollOpt | Comment;
+
 export interface PollOpt extends ItemBase {
   poll: number;
   text: string;

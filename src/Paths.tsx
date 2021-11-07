@@ -1,16 +1,12 @@
 import { Route, Routes } from "solid-app-router";
-import { New } from "./pages/New";
-import { Top } from "./pages/Top";
+import { Main } from "./pages/Main";
 
+export type ContentType = "new" | "best" | "ask" | "show" | "jobs";
 export function Paths() {
   return (
     <Routes>
-      <Route path="/" element={<Top />} />
-      <Route path="/new" element={<New />} />
-      <Route path="/best" element={<New />} />
-      <Route path="/ask" element={<New />} />
-      <Route path="/show" element={<New />} />
-      <Route path="/jobs" element={<New />} />
+      <Route path="/:contentType" element={<Main />} />
+      <Route path="/" element={<Main />} />
     </Routes>
   );
 }

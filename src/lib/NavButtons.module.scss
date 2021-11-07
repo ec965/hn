@@ -1,6 +1,8 @@
 .container {
   display: flex;
-  flex-wrap: wrap;
+  > :first-child {
+    margin-right: 8px;
+  }
 }
 
 .control {

@@ -1,11 +1,10 @@
 import { Show } from "solid-js";
-import styles from "./index.module.scss";
 import { Match, Switch } from "solid-js";
 import { useNavigate, useLocation } from "solid-app-router";
-import { trimSubpath } from "../../util/trimSubpath";
-import { pageQuery } from "../../util/pageQuery";
+import { trimSubpath } from "../util/trimSubpath";
+import { pageQuery } from "../util/pageQuery";
 import { FiChevronsLeft, FiChevronsRight } from "solid-icons/fi";
-import style from "./index.module.scss";
+import style from "./NavButtons.module.scss";
 
 interface ButtonProps {
   direction: "forward" | "backward";
@@ -34,8 +33,8 @@ function Button(props: ButtonProps) {
           <FiChevronsRight size={24} />
         </Match>
         <Match when={props.direction === "backward"}>
-          <Match when={props.direction === "backward"}>go back</Match>
           <FiChevronsLeft size={24} />
+          <h4>go back</h4>
         </Match>
       </Switch>
     </div>
@@ -48,7 +47,7 @@ interface NavButtonProps {
 }
 export function NavButtons(props: NavButtonProps) {
   return (
-    <div class={styles.container}>
+    <div class={style.container}>
       <Show when={props.showBackward}>
         <Button direction="backward" />
       </Show>
