@@ -62,7 +62,7 @@ export function TopStories() {
           <For each={stories()}>
             {(item, index) => (
               <ListItem
-                index={index() + 1 + parseInt(params.page ?? "0") * PAGE_SIZE}
+                index={index() + 1 + page() * PAGE_SIZE}
                 url={"url" in item ? item.url : ""}
                 {...item}
               />
