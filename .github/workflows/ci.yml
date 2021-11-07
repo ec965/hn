@@ -1,7 +1,7 @@
 name: HN Solid
 on: [push]
 jobs: 
-  Check-Code:
+  Deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
