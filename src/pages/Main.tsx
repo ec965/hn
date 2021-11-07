@@ -93,7 +93,7 @@ export function Main() {
         <Match when={page() * PAGE_SIZE > ids().length}>
           <NoContent />
         </Match>
-        <Match when={!stories.loading}>
+        <Match when={!stories.loading && ids().length > 0}>
           <For each={stories()}>
             {(item, index) => (
               <ListItem

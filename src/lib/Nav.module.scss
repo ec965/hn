@@ -1,9 +1,14 @@
 @import "../styles//variables.scss";
 
+.container {
+  background-color: $primary;
+}
+
 .nav {
   display: flex;
+  max-width: $max-width;
+  margin: auto;
   align-items: end;
-  background-color: $primary;
   > * {
     margin-right: 8px;
   }

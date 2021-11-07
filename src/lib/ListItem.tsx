@@ -1,4 +1,5 @@
 import style from "./ListItem.module.scss";
+import { Link } from "solid-app-router";
 import { DateTime, DurationObjectUnits, Interval } from "luxon";
 import { Show } from "solid-js";
 
@@ -56,7 +57,7 @@ export function ListItem(props: ListItemProps) {
         {timeSince(DateTime.fromSeconds(props.time))} ago
         <Show when={props.descendants}>
           {" "}
-          | <a href={`/item/${props.id}`}>{props.descendants} comments</a>
+          | <Link href={`/item/${props.id}`}>{props.descendants} comments</Link>
         </Show>
       </p>
     </article>

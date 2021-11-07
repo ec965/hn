@@ -1,4 +1,7 @@
+@import "../styles/variables.scss";
 .page {
+  max-width: $max-width;
+  margin: auto;
   padding: 8px;
   > * {
     padding: 6px;
