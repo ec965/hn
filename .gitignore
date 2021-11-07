@@ -1,6 +1,7 @@
 node_modules
 dist
 yarn-error.log
+.eslintcache
 .yarn/*
 !.yarn/cache
 !.yarn/patches
