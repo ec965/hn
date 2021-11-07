@@ -11,8 +11,8 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "dev": "vite",
-    "start": "run-p dev \"tsm --watch\"",
+    "start": "vite",
+    "dev": "run-p start \"tsm --watch\"",
     "build": "vite build --base=/hn/",
     "serve": "vite preview --base=/hn/",
     "fmt": "prettier --write .",

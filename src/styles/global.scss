@@ -1,11 +1,58 @@
 @import "./reset.css";
-@import "./variables.scss";
+
+$black: #282c34;
+$white: #fff;
+$grey: #aaa;
+$dark-grey: #888;
+$purple: #47418c;
+$blue: #61afef;
+$pink: #c678dd;
+$red: #e05c75;
+
+// https://bcodes.io/blog/post/theming-css-variables-in-scss
+$theme-map-light: (
+  "--foreground": $black,
+  "--background": $white,
+  "--mid-light": $grey,
+  "--mid-dark": $dark-grey,
+  "--link": $purple,
+  "--primary": $blue,
+  "--secondary": $pink,
+  "--destructive": $red,
+);
+
+$theme-map-dark: (
+  "--foreground": $white,
+  "--background": $black,
+  "--mid-light": $dark-grey,
+  "--mid-dark": $grey,
+  "--link": $blue,
+  "--primary": $purple,
+  "--secondary": $pink,
+  "--destructive": $red,
+);
+
+@mixin spread-map($map: ()) {
+  @each $key, $value in $map {
+    #{$key}: $value;
+  }
+}
+
+:root.light {
+  @include spread-map($theme-map-light);
+}
+
+:root.dark {
+  @include spread-map($theme-map-dark);
+}
 
 :root {
+  // @include spread-map($theme-map-light);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: $white;
-  color: $black;
   font-size: 14px;
+  background-color: var(--background);
+  color: var(--foreground);
+  --max-width: 1200px;
 }
 
 h1,
@@ -60,13 +107,13 @@ a {
   text-decoration: none;
   &:hover {
     text-decoration: underline;
-    color: $link;
+    color: var(--link);
   }
   &:visited {
-    color: $grey;
+    color: var(--mid-light);
     &:hover {
       text-decoration: underline;
-      color: $link;
+      color: var(--link);
     }
   }
 }

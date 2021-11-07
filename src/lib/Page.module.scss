@@ -1,6 +1,5 @@
-@import "../styles/variables.scss";
 .page {
-  max-width: $max-width;
+  max-width: var(--max-width);
   margin: auto;
   padding: 8px;
   > * {
