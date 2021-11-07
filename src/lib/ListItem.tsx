@@ -42,11 +42,13 @@ export function ListItem(props: ListItemProps) {
   return (
     <article>
       <div class={style.title}>
-        <h4 title={props.url}>
+        <h4>
           {props.index}.{" "}
-          <a href={props.url} target="_blank">
-            {props.title}
-          </a>
+          <Show when={props.url} fallback={<>{props.title}</>}>
+            <a href={props.url} target="_blank" title={props.title}>
+              {props.title}
+            </a>
+          </Show>
         </h4>
         <Show when={props.url}>
           <h6>{props.url && `(${new URL(props.url).hostname})`}</h6>
