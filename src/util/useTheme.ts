@@ -10,6 +10,7 @@ export function useTheme(): [Accessor<Theme>, (theme: Theme) => void] {
   const setTheme = (theme: "light" | "dark") => {
     document.documentElement.className = theme;
     setRootTheme(document.documentElement.className as Theme);
+    localStorage.setItem("theme", theme);
   };
   return [rootTheme, setTheme];
 }
